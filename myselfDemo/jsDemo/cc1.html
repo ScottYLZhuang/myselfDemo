@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        canvas{
+            border:1px solid #000;
+            z-index: 1;
+        }
+        .divCvs{
+            border:1px solid #000;
+            z-index: 1;
+            display: inline-block;
+
+        }
+        .testChart{
+            width: 100px;
+            height: 100px;
+            /* border:1px solid red; */
+            z-index: 1;
+        }
+        .inputChart{
+            width: 100px;
+            height: 20px;
+            /* border:1px solid red; */
+            z-index: 1;
+        }
+        .bg1{
+            background-color: aqua;
+        }
+        .bg2{
+            background-color: azure;
+        }
+        .bg3{
+            background-color: cornflowerblue;
+        }
+        .bg4{
+            background-color:antiquewhite;
+        }
+        .imgsize{
+            width:100%;
+            height: 100%;
+        }
+        .inputText{
+            width: 100px;
+            height: 20px;
+        }
+
+        .grade {
+            width: 10000px;
+            height: 10000px;
+            background-color: rgba(0,0,0, 0.2);
+            background-size: 20px 20px, 20px,20px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 0px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 0px);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+        .guidelines{
+            position: absolute;
+            left: 170px;
+            top: 170px;
+        }
+        .cav{
+            position: absolute;
+            left: 170px;
+            top: 170px;  
+            z-index: 1;
+
+        }
+        .xa{
+            border-top: 0px solid yellow;
+        }
+        .ya{
+            border-left: 0px solid yellow;
+        }
+        .xaShow{
+            border-top: 1px solid yellow;
+        }
+        .yaShow{
+            border-left: 1px solid yellow;
+        }
+        .coordinate{
+            width: 80px;
+            height: 30px;
+            text-align: right;
+            z-index: 2;
+        }
+        .topCdnt{
+            position: absolute;
+            left: 50px;
+            top: 140px;
+        }
+        .centreCdnt{
+            position: absolute;
+            left: 280px;
+            top: 170px;
+        }
+        .divCvsPa{
+            width: 1500px;
+            height: 1000px;
+            margin-top: 250px;
+            margin-left: 150px;
+            border: 1px solid chartreuse;
+            overflow: auto;
+            position: absolute;
+        }
+        .glnone{
+            position: absolute;
+        }
+        .glshow{
+            position: absolute;
+            border-width: 6px !important;
+        }
+        .topLeftBorder{
+           border-top: 0px solid #09f;
+           border-left: 0px solid #09f;
+        }
+        .leftBorder{
+           border-left:  0px solid #09f;
+            
+        }
+        .leftBottomBorder{
+            border-left: 0px solid #09f;
+            border-bottom: 0px solid #09f;
+        }
+        .bottomBorder{
+            border-bottom: 0px solid #09f;
+        }
+        .bottomRightBorder{
+            border-bottom: 0px solid #09f;
+            border-right: 0px solid #09f;
+        }
+        .rightBorder{
+            border-right: 0px solid #09f;
+        }
+        .rightTopBorder{
+            border-top: 0px solid #09f;
+            border-right:0px solid #09f;
+        }
+        .topBorder{
+            border-top: 0px solid #09f;
+        }
+        .glLable{
+            width: 5px;
+            height: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grade">
+    
+     <div id="Xcav1" class="cav xa"></div>
+     <div id="Ycav1" class="cav ya"></div>
+     <div id="Xcav2" class="cav xa"></div>
+     <div id="Ycav2" class="cav ya"></div> 
+     <div id="cavapex"  class="topCdnt coordinate"></div>     
+     <!-- <div id="centre"  class="centreCdnt coordinate"></div>      -->
+     
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas2"></canvas>
+    <div id="divCvsPa" class="divCvsPa">
+        <div id="divCvs" class="divCvs" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="false" ondragstart="drag(event, this)">
+        </div>
+
+        <div id="apex"  draggable="false" class="topCdnt coordinate"></div>     
+        <div id="Xguidelines1"  draggable="false" class="guidelines xa"></div>
+        <div id="Yguidelines1"  draggable="false" class="guidelines ya"></div>
+        <div id="Xguidelines2"  draggable="false" class="guidelines xa"></div>
+        <div id="Yguidelines2"  draggable="false" class="guidelines ya"></div>
+        <div id="gl1" draggable="false" class="glLable glnone topLeftBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl2" draggable="false" class="glLable glnone leftBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl3" draggable="false" class="glLable glnone leftBottomBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl4" draggable="false" class="glLable glnone bottomBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl5" draggable="false" class="glLable glnone bottomRightBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl6" draggable="false" class="glLable glnone rightBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl7" draggable="false" class="glLable glnone rightTopBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl8" draggable="false" class="glLable glnone topBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+    </div>    
+    <div class="testChart bg1" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)"></div>
+    <div class="testChart bg2" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)"></div>
+    <div class="testChart bg3" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)"></div>
+    <div class="inputChart bg4" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">
+        <input class="inputText" type="text"/>
+    </div>
+    <div id="content" contenteditable="true" class="testChart bg4"
+    ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)"></div> 
+    <div id="img1" class="testChart" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">
+        <img class="imgsize" src="./wcwq.png"/>   
+    </div>
+</div>  
+<script src="./jquery-1.8.3.min.js"></script>
+<script src="./dropTools.js"></script>  
+<script src="./test1.js"></script>
+<script src="./test2.js"></script>
+<script src="./divCvs.js"></script>
+</body>
+</html>
