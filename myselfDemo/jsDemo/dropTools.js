@@ -44,6 +44,7 @@ function drop(ev,divdom)
                 srcdiv.setAttribute("onmouseup","divCvsMouseUp(this)");
                 srcdiv.setAttribute("onmousemove","divCvsMouseMove(this)");
                 srcdiv.setAttribute("onkeydown","divCvsKeyDown(event)");
+                srcdiv.setAttribute("draggable","false");
                 srcdiv.setAttribute("tabindex",`${chidrenDom.length}`);
             
                 outerHTML+=srcdiv.outerHTML;
@@ -63,6 +64,7 @@ function drop(ev,divdom)
                  srcdiv.setAttribute("onmouseup","divCvsMouseUp(this)");
                  srcdiv.setAttribute("onmousemove","divCvsMouseMove(this)");
                  srcdiv.setAttribute("onkeydown","divCvsKeyDown(event)");
+                 srcdiv.setAttribute("draggable","false");
                  srcdiv.setAttribute("tabindex",0);
                  srcdiv.id=`screenChart_0`;
                 

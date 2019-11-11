@@ -166,8 +166,8 @@ divCvsPa.addEventListener('mousemove', function(e) {
         }
         if(flag){
             apexdoc.innerText=rangeJson.left+","+rangeJson.top;
-            apexdoc.style.left=rangeJson.left+"px";
-            apexdoc.style.top=rangeJson.top+"px";
+            apexdoc.style.left=rangeJson.left-80+"px";
+            apexdoc.style.top=rangeJson.top-30+"px";
             apexdoc.style.display="block";
             createDiv(rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,paDom,paDom.id);
             resetGlines(rangeJson.left,rangeJson.top,rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,width,height,paDom.id);
@@ -244,8 +244,8 @@ function divCvsKeyDown (event) {
         }
         if(flag){
             apexdoc.innerText=rangeJson.left+","+rangeJson.top;
-            apexdoc.style.left=rangeJson.left+"px";
-            apexdoc.style.top=rangeJson.top+"px";
+            apexdoc.style.left=rangeJson.left-80+"px";
+            apexdoc.style.top=rangeJson.top-30+"px";
             apexdoc.style.display="block";
             createDiv(rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,e.target,id);
             resetGlines(rangeJson.left,rangeJson.top,rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,width,height,id);
@@ -349,10 +349,10 @@ function divCvsMouseMove(e){
             // height== Math.round((height)*100)/100;
             createDiv(left,top,w,h,e,id);
             resetGlines(left,top,left,top,w,h,width,height,id);
-            var apex = document.getElementById('apex');
-            apex.innerText=Math.round((ax-w/2)*100)/100+","+Math.round((ay-h/2)*100)/100;
-            apex.style.left=left+"px";
-            apex.style.top=top+"px";
+            apexdoc.innerText=Math.round((ax-w/2)*100)/100+","+Math.round((ay-h/2)*100)/100;
+            apexdoc.style.left=left-80+"px";
+            apexdoc.style.top=top-30+"px";
+            apexdoc.style.display="block";
             console.log("DIV置left："+left+" top:"+top);
             console.log("DIV置x："+ax+" y:"+ay);
             
