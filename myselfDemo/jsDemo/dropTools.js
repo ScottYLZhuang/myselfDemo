@@ -1,3 +1,36 @@
+var gwidth=1000;
+var gheight=800;
+$(function () {
+    initScale();
+})
+
+function initScale(){
+
+       let xScaleDcount= Math.ceil(gwidth/100);
+       let yScaleDcount= Math.ceil(gheight/100);
+       let xIndexList=[],yIndexList=[],xIndex=0,yIndex=0;
+        while(xIndex<xScaleDcount){
+            xIndexList.push(xIndex*100);
+            xIndex++;
+        }
+        while(yIndex<yScaleDcount){
+            yIndexList.push(yIndex*100);
+            yIndex++;
+        }
+        console.log("xIndexList: ",xIndexList);
+        console.log("yIndexList: ",yIndexList)
+    //    yScaleTemplate;
+    //    xScaleTemplate;
+    //    yScale
+    //    xScale
+       let htmlx =template('xScaleTemplate',{"xIndexList":xIndexList});
+       document.getElementById('xScale').innerHTML = htmlx;
+       let htmly =template('yScaleTemplate',{"yIndexList":yIndexList});
+       document.getElementById('yScale').innerHTML = htmly;
+}
+
+
+
 function allowDrop(ev)
 {
     ev.preventDefault();

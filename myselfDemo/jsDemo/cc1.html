@@ -149,6 +149,52 @@
             width: 5px;
             height: 5px;
         }
+        
+        .xScalep{
+            width: 100%;
+            height: 20px;
+        }
+        .xScale{
+            width: 99px;
+            height: 20px;
+            float: left;
+            background: rgba(29,50,72,0.5);
+            background-size: 100px auto;
+            border-right: 1px solid red
+        }
+        .xScalep{
+            height: 100%;
+            width: 20px;
+            position: absolute;
+            top: 0px;
+        }
+        .yScale{
+            height: 99px;
+            width: 20px;
+            background: rgba(29,50,72,0.5);
+            border-bottom: 1px solid red;
+        }
+
+        .xScaleDetail{
+            width: 19px;
+            height: 15px;
+            border-right: 1px solid red;
+            float: left;
+        }
+
+        .yScaleDetail{
+            width: 15px;
+            height: 19px;
+            border-bottom: 1px solid red;
+        }
+
+        .scalePoint{
+            position: absolute;
+            font-size: 10px;
+            font-family: PingFang SC;
+            margin-left: 3px;
+            color: rgba(255,255,255,1);
+        }
     </style>
 </head>
 <body>
@@ -166,8 +212,41 @@
     <canvas id="canvas2"></canvas>
     <div id="divCvsPa" class="divCvsPa">
         <div id="divCvs" class="divCvs" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="false" ondragstart="drag(event, this)">
+            <script type="text/html" id="xScaleTemplate">
+                {{each xIndexList xIndex x}}
+                    <div class="xScale" key="{{x}}_xscale">
+                        <span class="scalePoint">{{xIndex}}</span>
+                        <div class="xScaleDetail">
+                        </div>
+                        <div class="xScaleDetail">
+                        </div>
+                        <div class="xScaleDetail">
+                        </div>
+                        <div class="xScaleDetail">
+                        </div>   
+                    </div>
+                {{/each}}
+            </script>    
+            <div id="xScale">
+            </div>
+            <script type="text/html" id="yScaleTemplate">
+                {{each yIndexList yIndex y}}
+                <div class="yScale" key="{{y}}_yscale">
+                        {{if yIndex!=0 || yIndex!='0'}}<span class="scalePoint">{{yIndex}}</span>{{/if}}
+                        <div class="yScaleDetail">
+                        </div>
+                        <div class="yScaleDetail">
+                        </div>
+                        <div class="yScaleDetail">
+                        </div>
+                        <div class="yScaleDetail">
+                        </div>
+                </div>
+                {{/each}}
+            </script>
+            <div id="yScale">
+            </div>
         </div>
-
         <div id="apex"  draggable="false" class="topCdnt coordinate"></div>     
         <div id="Xguidelines1"  draggable="false" class="guidelines xa"></div>
         <div id="Yguidelines1"  draggable="false" class="guidelines ya"></div>
@@ -195,9 +274,10 @@
     </div>
 </div>  
 <script src="./jquery-1.8.3.min.js"></script>
+<script src="./template-web.js"></script>
 <script src="./dropTools.js"></script>  
 <script src="./test1.js"></script>
 <script src="./test2.js"></script>
-<script src="./divCvs.js"></script>
+<script src="./divCvs.js"></script> 
 </body>
 </html>
