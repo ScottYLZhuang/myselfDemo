@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>scotthome</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" /> -->
+    <link rel="stylesheet" href="./css/createScreen.css">
+</head>
+
+<body>
+    <div class="">
+        <div id="divCvsPa" class="divCvsPa">
+            <div id="divCvs" class="divCvs grade">
+                <script type="text/html" id="xScaleTemplate">
+                    {{each xIndexList xIndex x}}
+                        {{if x!= xIndexList.length-1}}
+                        <div class="xScale" key="{{x}}_xscale">
+                            <span class="scalePoint">{{xIndex}}</span>
+                            <div class="xScaleDetail">
+                            </div>
+                            <div class="xScaleDetail">
+                            </div>
+                            <div class="xScaleDetail">
+                            </div>
+                            <div class="xScaleDetail">
+                            </div>   
+                        </div>
+                        {{else}}
+                        <div class="xScale" key="{{x}}_xscale" style="width:{{xRemainder}}">
+                            <span class="scalePoint">{{xIndex}}</span>
+                            <% for(var i = 0;i < xLastShow;i++){ %>
+                                <div class="xScaleDetail">
+                                </div>
+                            <%}%>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </script>    
+                <div id="xScale" class="scale">
+                </div>
+                <script type="text/html" id="yScaleTemplate">
+                    {{each yIndexList yIndex y}}
+                        {{if y!= yIndexList.length-1}}
+                        <div class="yScale" key="{{y}}_xscale">
+                            {{if y!=0}}<span class="scalePoint">{{yIndex}}</span>{{/if}}
+                            <div class="yScaleDetail">
+                            </div>
+                            <div class="yScaleDetail">
+                            </div>
+                            <div class="yScaleDetail">
+                            </div>
+                            <div class="yScaleDetail">
+                            </div>   
+                        </div>
+                        {{else}}
+                        <div class="yScale" key="{{y}}_xscale" style="height:{{yRemainder}}">
+                            <span class="scalePoint">{{yIndex}}</span>
+                            <%for(var j = 0;j < yLastShow;j++){%>
+                                <div class="yScaleDetail">
+                                </div>
+                            <%}%>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </script>
+                <div id="yScale" class="scale">
+                </div>  
+            </div>
+            <div id="paintSize" class="overlayBody overlayHide" >
+                    <div class="overlay-title">
+                        <div class="otitle">
+                            画布大小
+                        </div>
+                        <div class="iconfont icon-close-b oclase" onclick="closeOverLay(false,'paintSize')">
+                         </div>   
+                    </div>
+                    <div class="overlay-ctn">
+                        <div class="oinput">宽度:<input id="resizeW" type="text" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/></div>
+                        <div class="oinput">长度:<input id="resizeH" type="text" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/></div>
+                    </div>
+                    <div class="overlay-footer">
+                        <button type="button" class="obutton" onclick="closeOverLay(true,'paintSize')">确认</button>
+                    </div>  
+
+            </div>
+            <div id="createModel" class="overlayBody overlayHide" >
+                    <div class="overlay-title">
+                        <div class="otitle">
+                            新建模块
+                        </div>
+                        <div class="iconfont icon-close-b oclase" onclick="closeOverLay(false,'createModel')">
+                         </div>   
+                    </div>
+                    <div class="overlay-ctn">
+                        <div class="oinput">
+                            <span class="oSpan">宽度:</span>
+                            <input id="modelW" type="text" value="150" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/>
+                        </div>
+                        <div class="oinput">
+                            <span class="oSpan">长度:</span>
+                            <input id="modelH" type="text" value="150" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/>
+                        </div>
+                        <div class="oinput">
+                            <span class="oSpan">X:</span>
+                            <input id="modelX" type="text" value="10" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/>
+                        </div>
+                        <div class="oinput">
+                            <span class="oSpan">Y:</span>
+                            <input id="modelY" type="text" value="10" onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/>
+                        </div>
+                    </div>
+                    <div class="overlay-footer">
+                        <button type="button" class="obutton" onclick="closeOverLay(true,'createModel')">确认</button>
+                    </div>  
+
+            </div>
+        <div id="apex"  draggable="false" class="topCdnt coordinate"></div>     
+        <div id="Xguidelines1"  draggable="false" class="guidelines xa"></div>
+        <div id="Yguidelines1"  draggable="false" class="guidelines ya"></div>
+        <div id="Xguidelines2"  draggable="false" class="guidelines xa"></div>
+        <div id="Yguidelines2"  draggable="false" class="guidelines ya"></div>
+        <div id="gl1" draggable="false" class="glLable glnone topLeftBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl2" draggable="false" class="glLable glnone leftBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl3" draggable="false" class="glLable glnone leftBottomBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl4" draggable="false" class="glLable glnone bottomBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl5" draggable="false" class="glLable glnone bottomRightBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl6" draggable="false" class="glLable glnone rightBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl7" draggable="false" class="glLable glnone rightTopBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+        <div id="gl8" draggable="false" class="glLable glnone topBorder" onmousedown="zoomInDown(this)" onmouseup="zoomInUp(this)" onmousemove="zoomInMove(this)"></div>
+
+        </div>
+        <div id="centre"  class="centreCdnt coordinate" style="position: absolute;"></div>     
+        <div id="rightMenu" class="rightMenu">
+                <button type="button" class="rightMenuBotton" id="creataScreen" onclick="createModel(this)">
+                    <i class="iconfont icon-add" ></i>新增模块
+                </button>
+                <button type="button" class="rightMenuBotton" id="importContext" onclick="changePaintSize(this)">
+                    <i class="iconfont">&#xe62d;</i>画布大小
+                </button>
+                <button type="button" class="rightMenuBotton" id="importContext" onclick="saveScreenModel(this)">
+                    <i class="iconfont icon-baocun"></i>保存
+                </button>
+        </div>
+     </div>
+
+     <script type='text/javascript' src="../jquery-1.8.3.min.js"></script>
+     <script type="text/javascript" src="../template-web.js"></script>
+     <script type="text/javascript" src="./js/screenRequestConverter.js"></script>
+     <script type="text/javascript" src="./js/screenResponseCoverter.js"></script>
+     <script type="text/javascript" src="./js/createScreen.js"></script>
+     <script type="text/javascript" src="./js/commontools.js"></script>
+     <script type="text/javascript" src="./js/screenChartMove.js"></script>
+</body>
+
+</html>

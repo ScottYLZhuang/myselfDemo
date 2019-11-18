@@ -1,0 +1,397 @@
+.grade {
+    width: 1000px;
+    height: 600px;
+    background-size: 20px 20px, 20px,20px;
+    /* background-image: linear-gradient(black 1px, transparent 0px), linear-gradient(90deg, black 1px, transparent 0px); */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.divCvsPa{
+    margin-top: 40px;
+    width: 99%;
+    height: 99%;
+    overflow: inherit;
+    position: absolute;
+}
+
+.divCvs{
+    border:1px solid #000;
+    z-index: 1;
+    display: inline-block;
+
+}
+.xScalep{
+    width: 100%;
+    height: 20px;
+}
+.xScale{
+    width: 99px;
+    height: 20px;
+    float: left;
+    background: rgba(29,50,72,0.5);
+    background-size: 100px auto;
+    border-right: 1px solid red
+}
+.xScalep{
+    height: 100%;
+    width: 20px;
+    position: absolute;
+    top: 0px;
+}
+.yScale{
+    height: 99px;
+    width: 20px;
+    background: rgba(29,50,72,0.5);
+    border-bottom: 1px solid red;
+}
+
+.xScaleDetail{
+    width: 19px;
+    height: 15px;
+    border-right: 1px solid red;
+    float: left;
+}
+
+.yScaleDetail{
+    width: 15px;
+    height: 19px;
+    border-bottom: 1px solid red;
+}
+
+.scalePoint{
+    position: absolute;
+    font-size: 10px;
+    font-family: PingFang SC;
+    margin-left: 3px;
+    color:black;
+}
+
+.rightMenuBotton{
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color: #004b7f;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.rightMenu{
+    float: right;
+}
+
+.overlayBody{
+    background: #1E4750;
+    border: 2px solid #2C7763;
+    width: 380px;
+    height: 320px;
+    position: absolute;
+    left: 33%;
+    top: 10%;
+    z-index: 1000;
+}
+
+.overlay-title{
+    position: relative;
+    width: 100%;
+    height: 58px;
+    border-bottom: 2px solid #2C7763;
+    background: #17373E;
+}
+
+.overlay-ctn{
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #1E4750;
+    color: #fff;
+    font-size: 16px;
+}
+
+.overlay-footer{
+    position: relative;
+    width: 100%;
+    height: 58px;
+    border-top: 2px solid #2C7763;
+    background: #17373E;
+}
+
+.oclase{
+    float: right;
+    margin-top: 15px;
+    color: #2C7763;
+    margin-right: 20px;
+}
+
+.otitle{
+    color: #fff;
+    font-size: 16px;
+    line-height: 4;
+    margin-left: 30px;
+    float: left;
+}
+
+
+.oinput{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.obutton{
+    width: 100%;
+    height: 100%;
+    background: #17373E;
+    border-width: 0;
+    color: #fff;
+    font-size: 16px;
+}
+
+.hiddenStyle{
+    opacity: 0.4;
+}
+
+.overlayHide{
+    display: none;
+}
+
+.oSpan{
+    width: 100px;
+    height: 30px;
+    float: left;
+}
+
+[name='docDivMode']{
+    width: 149px;
+    height: 149px;
+    left: 10px;
+    top: 10px;
+    position: absolute;
+    /* background-color: #00C6FF;; */
+    border: 1px solid #00C6FF;
+}
+
+
+.coordinate{
+    width: 80px;
+    height: 30px;
+    text-align: right;
+    z-index: 2;
+    color:  red;
+    font-size: 16px;
+}
+.topCdnt{
+    position: absolute;
+    left: 50px;
+    top: 140px;
+}
+
+
+.xa{
+    border-top: 0px solidy #2C7763;
+}
+.ya{
+    border-left: 0px solid #2C7763;
+}
+.xaShow{
+    border-top: 1px solid #2C7763;
+}
+.yaShow{
+    border-left: 1px solid yellow;
+}
+.guidelines{
+    position: absolute;
+    left: 170px;
+    top: 170px;
+}
+
+.glLable{
+    width: 5px;
+    height: 5px;
+    z-index: 999;
+}
+.glnone{
+    position: absolute;
+}
+.glshow{
+    position: absolute;
+    border-width: 6px !important;
+}
+.topLeftBorder{
+   border-top: 0px solid #09f;
+   border-left: 0px solid #09f;
+}
+.leftBorder{
+   border-left:  0px solid #09f;
+    
+}
+.leftBottomBorder{
+    border-left: 0px solid #09f;
+    border-bottom: 0px solid #09f;
+}
+.bottomBorder{
+    border-bottom: 0px solid #09f;
+}
+.bottomRightBorder{
+    border-bottom: 0px solid #09f;
+    border-right: 0px solid #09f;
+}
+.rightBorder{
+    border-right: 0px solid #09f;
+}
+.rightTopBorder{
+    border-top: 0px solid #09f;
+    border-right:0px solid #09f;
+}
+.topBorder{
+    border-top: 0px solid #09f;
+}
+
+.scale{
+    position: absolute;
+    z-index: 999;
+}
+
+
+.createLayoutModel{
+    background: #1E4750;
+    border: 2px solid #2C7763;
+    width: 450px;
+    height: 300px;
+    position: absolute;
+    left: 33%;
+    top: 10%;
+    z-index: 1;
+}
+
+
+.layoutCtn{
+    width: 100%;
+    height: 40%;
+    float: left;
+}
+
+.layoutCtnName{
+    width: 80px;
+    height: 100%;
+    text-align: center;
+    margin-top: 30px;
+    float: left;
+}
+
+.layoutCtnNameInput{
+    width: 63%;
+    height: 26px;
+    padding-top: 15px;
+    text-align: center;
+    background-color: #1C3B43;
+    border: 2px solid #1E5B6F;
+    border-radius: 15px;
+    float: left;
+    margin-top: 14px;
+}
+
+.layoutCtnParam{
+    width: 100%;
+    height: 40%;
+    float: left;
+}
+
+.layoutCtnParam1{
+    float: left;
+    height: 100%;
+    width: 80px;
+    text-align: center;
+    margin-top: 28px;
+}
+.layoutCtnParam2{
+    float: left;
+    height: 26px;
+    padding-top: 15px;
+    width: 50px;
+    text-align: center;
+    margin-top: 14px;
+    background-color: #234953;
+    border: 2px solid #1E5B6F;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.layoutCtnParam3{
+    float: left;
+    height: 26px;
+    padding-top: 15px;
+    width: 83px;
+    text-align: center;
+    margin-top: 14px;
+    background-color: #1C3B43;
+    border-bottom: 2px solid #1E5B6F;
+    border-top: 2px solid #1E5B6F
+}
+.layoutCtnParam4{
+    float: left;
+    text-align: center;
+    margin-top: 14px;
+    background-color: #234953;
+    height: 26px;
+    padding-top: 15px;
+    border: 2px solid #1E5B6F;
+    width: 50px;
+}
+.layoutCtnParam5{
+    float: left;
+    height: 26px;
+    padding-top: 15px;
+    width: 83px;
+    text-align: center;
+    margin-top: 14px;
+    background-color: #1C3B43;
+    border-bottom: 2px solid #1E5B6F;
+    border-top: 2px solid #1E5B6F;
+    border-right: 2px solid #1E5B6F;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.layoutCtnParam6{
+    float: left;
+    height: 58%;
+    width: 50px;
+    text-align: center;
+    margin-top: 14px;
+    margin-left: 15px;
+    background-color: #1C3B43;
+    border: 2px solid #1E5B6F;
+    font-size: 35px !important;
+}
+
+
+.layoutSelected{
+    width: 328px;
+    height: auto;
+    background: rgba(28,59,67,1);
+    border: 2px solid rgba(30,91,111,1);
+    border-radius: 10px;
+    position: absolute;
+    left: 100px;
+    top: 147px;
+    z-index: 1;
+}
+
+.layoutSelectedOption{
+    width: 100%;
+    padding-top: 8px;
+    height: 33px;
+    text-align: center;
+    font-size: 16px;
+    font-family: PingFang SC;
+    color: rgba(255,255,255,1);
+}

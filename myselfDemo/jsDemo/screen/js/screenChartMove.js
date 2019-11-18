@@ -1,10 +1,13 @@
+
 var xGl1=document.getElementById("Xguidelines1");
 var yGl1=document.getElementById("Yguidelines1");
 var xGl2=document.getElementById("Xguidelines2");
 var yGl2=document.getElementById("Yguidelines2");
-
+var index=0;
 var apexdoc = document.getElementById('apex');
-
+var centredoc = document.getElementById('centre');
+var leftRe=0;
+var topRe=0;
 var gl1=document.getElementById("gl1");
 var gl2=document.getElementById("gl2");
 var gl3=document.getElementById("gl3");
@@ -23,18 +26,19 @@ var ax,ay,//移动时移动位置变化
 var divCvs=document.getElementById("divCvs");
 var divCvsPa=document.getElementById("divCvsPa");
 
-var marginTop = 250;
-var marginLeft = 150;
-(function(){
-    divCvs.style.width=width+"px";
-    divCvs.style.height=height+"px";
-    // divCvs.style.marginTop=marginTop+"px";
-    // divCvs.style.marginLeft=marginLeft+"px";
-
-})();
-divCvs.addEventListener('mousemove', function(e) {
-    // console.log("divCvs x y",e.x,e.y)
-})
+ width = divCvs.clientWidth;
+ height = divCvs.clientHeight;
+var marginTop = 0;
+var marginLeft = 0;
+document.addEventListener('mouseup', function(e) {
+    isDrop = false;
+    isZoom=false
+    xGl1.className="guidelines xa";
+    yGl1.className="guidelines ya";
+    xGl2.className="guidelines xa";
+    yGl2.className="guidelines ya";
+    apexdoc.style.display="none";
+});
 
 divCvsPa.addEventListener('mousemove', function(e) {
     if(isZoom){//&& e.target.id==isZoomKey
@@ -47,11 +51,11 @@ divCvsPa.addEventListener('mousemove', function(e) {
             pOffLeft=divCvsPa.offsetLeft,
             pOffTop=divCvsPa.offsetTop;
         var scrollLeft=divCvsPa.scrollLeft,
-             scrollTop=divCvsPa.scrollTop;
+                scrollTop=divCvsPa.scrollTop;
         var pageX=e.pageX,//鼠标位置page坐标
             pageY=e.pageY;
         let x = pageX+scrollLeft-offLeft-pOffLeft,
-         y = pageY+scrollTop-offTop-pOffTop;//当前鼠标坐标
+            y = pageY+scrollTop-offTop-pOffTop;//当前鼠标坐标
         let apex=$("#apex").text();
         let apexArray=apex.split(",");
         let dijiaoRightX=parseFloat(apexArray[0])+w,dijiaoRightY=parseFloat(apexArray[1])+h;
@@ -164,6 +168,7 @@ divCvsPa.addEventListener('mousemove', function(e) {
         }
         if(flag){
             apexdoc.innerText=rangeJson.left+","+rangeJson.top;
+            centredoc.innerText=paDom.id+" : "+rangeJson.left+","+rangeJson.top;
             apexdoc.style.left=rangeJson.left-80+"px";
             apexdoc.style.top=rangeJson.top-30+"px";
             apexdoc.style.display="block";
@@ -175,80 +180,70 @@ divCvsPa.addEventListener('mousemove', function(e) {
     // console.log("divCvsPa x y",e.x,e.y)
 
 })
-document.addEventListener('mousemove', function(e) {
-    // console.log("x y",e.x,e.y)
-})
-
-document.addEventListener('mouseup', function(e) {
-        isDrop = false;
-        isZoom=false
-        xGl1.className="guidelines xa";
-        yGl1.className="guidelines ya";
-        xGl2.className="guidelines xa";
-        yGl2.className="guidelines ya";
-        apexdoc.style.display="none";
-        // $(".glshow").addClass("glnone");
-        // $(".glshow").removeClass("glshow");
-})
-document.onkeydown = function(event) {
-    // if(37<=event.keyCode<=40){
-    //     return false;
-
-    // }
-}
-
-
 function divCvsKeyDown (event) {
+    index++;
     var e = event || window.event;
     let id=e.target.id;
-    let left=e.target.offsetLeft;
-    let top=e.target.offsetTop;
+
+    let tempTarget=document.getElementById(id);
     let flag=false;
     let rangeJson={};
-    let newW=e.target.clientWidth,
-    newH=e.target.clientHeight;
+    let newW=tempTarget.clientWidth,
+    newH=tempTarget.clientHeight;
+    if(isZoomKey==id){
+   }else{
+        leftRe=tempTarget.offsetLeft;
+        topRe=tempTarget.offsetTop;
+   }
+    console.log("divCvsKeyDown start key x"+leftRe+" y:"+topRe);
+    console.log("divCvsKeyDown index"+index);
+    console.log("divCvsKeyDown key e"+e);
+    console.log("divCvsKeyDown key w"+newW+" h:"+newH);
     //ctrlKey altKey shiftKey
     //二次验证操作对象offsetLeft
-    if(id.indexOf("screenChart_")>-1){
+    if(id.indexOf("docDivMode_")>-1){
         switch(e.keyCode){
             case 37:
                 //left
-                left=left-1;
-                rangeJson=borderlineValidate(left,top,newW,newH);
+                leftRe=leftRe-1;
+                rangeJson=borderlineValidate(leftRe,topRe,newW,newH);
                 flag=true;
                 break;
             case 38:
                 //up
-                top=top-1;
-                rangeJson=borderlineValidate(left,top,newW,newH);
+                topRe=topRe-1;
+                rangeJson=borderlineValidate(leftRe,topRe,newW,newH);
                 flag=true;
                 break;
             case 39:
                 //Right
-                left=left+1;
-                rangeJson=borderlineValidate(left,top,newW,newH);
+                leftRe=leftRe+1;
+                rangeJson=borderlineValidate(leftRe,topRe,newW,newH);
                 flag=true;
                 break;
             case 40:
                 //down
-                top=top+1;
-                rangeJson=borderlineValidate(left,top,newW,newH);
+                topRe=topRe+1;
+                rangeJson=borderlineValidate(leftRe,topRe,newW,newH);
                 flag=true;
                 break;
             case 46:
                 //delete
                 e.target.remove();
+                deleteModel(e.target.id);
                 break;    
         }
         if(flag){
+            console.log("divCvsKeyDown keyup"+rangeJson.left+" y:"+rangeJson.top);
             apexdoc.innerText=rangeJson.left+","+rangeJson.top;
+            centredoc.innerText=id+" : "+rangeJson.left+","+rangeJson.top;
             apexdoc.style.left=rangeJson.left-80+"px";
             apexdoc.style.top=rangeJson.top-30+"px";
             apexdoc.style.display="block";
-            createDiv(rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,e.target,id);
+            isZoomKey=id;
+            createDiv(rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,tempTarget,id);
             resetGlines(rangeJson.left,rangeJson.top,rangeJson.left,rangeJson.top,rangeJson.newW,rangeJson.newH,width,height,id);
         }else if(e.keyCode==46){
-            e.target.remove();
             apexdoc.style.display="none";
             xGl1.className="guidelines xa";
             yGl1.className="guidelines ya";
@@ -270,9 +265,9 @@ function divCvsMouseDown(e){
     console.log("点击鼠标位置x："+x+" y:"+y);
 }
 function divCvsMouseUp(e){
-     e = e || window.event;
-     x = e.clientLeft;
-     y = e.clientTop;
+        e = e || window.event;
+        x = e.clientLeft;
+        y = e.clientTop;
     console.log("松开鼠标位置x："+x+" y:"+y)
     clearTimeout(timeOutEvent);
     if(timeOutEvent!=0){
@@ -348,6 +343,7 @@ function divCvsMouseMove(e){
             createDiv(left,top,w,h,e,id);
             resetGlines(left,top,left,top,w,h,width,height,id);
             apexdoc.innerText=Math.round((ax-w/2)*100)/100+","+Math.round((ay-h/2)*100)/100;
+            centredoc.innerText=id+" : "+Math.round((ax-w/2)*100)/100+","+Math.round((ay-h/2)*100)/100;
             apexdoc.style.left=left-80+"px";
             apexdoc.style.top=top-30+"px";
             apexdoc.style.display="block";
@@ -364,10 +360,12 @@ function longPress(){
 
 
 function createDiv(x,y,w,h,e,id){
+    console.log("createDiv x: "+x+" y: "+y+" w: "+w+" h: "+h+"e: "+e.outerHTML);
     e.style.left=x+"px";
     e.style.top=y+"px";
     e.style.width=w+"px";
     e.style.height=h+"px";
+    console.log("createDiv end e:"+e.outerHTML);
 }
 
 function resetGlines(left,top,mLeft,mtop,Gwidth,Gheight,width,height,id){
@@ -497,6 +495,7 @@ function zoomInUp(e){
 
 
 function borderlineValidate(left,top,w,h){
+    console.log("borderlineValidate left"+left+" top:"+top+" w"+w+" h:"+h);
     let rangeJson={}
         if(left>=0 && top>=0 && left+w<=width && top+h<=height){
             rangeJson={
@@ -526,4 +525,14 @@ function borderlineValidate(left,top,w,h){
             }
         }
         return rangeJson;
+}
+
+
+
+function deleteModel(id){
+    var modelList=document.getElementsByName("docDivMode");
+    for (let index = 0; index < modelList.length; index++) {
+        modelList[index].id="docDivMode_"+index;
+        modelList[index].setAttribute("tabindex",index)
+    }
 }
